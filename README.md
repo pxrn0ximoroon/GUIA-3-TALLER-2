@@ -7,7 +7,7 @@ escribimos pruebas con pytest.
 
 ## Integrantes
 
-- [Nombre estudiante 1]
+- Andres Espinosa - 20242020114
 - [Nombre estudiante 2, si es en pareja]
 
 ## De qué trata el proyecto
