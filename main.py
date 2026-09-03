@@ -1,89 +1,22 @@
-class OrderSystem:
-    """Sistema inicial de pedidos con múltiples responsabilidades."""
+"""Arranca el sistema: crea los objetos, los conecta y corre el pedido."""
 
-    def __init__(self, customer_type, items, payment_method):
-        """Inicializa el sistema con el tipo de cliente, los productos y el método de pago."""
-        self.customer_type = customer_type
-        self.items = items
-        self.payment_method = payment_method
+from controller.order_controller import OrderController
+from model.discount import VipDiscount
+from model.order import Order
+from model.payment import CardPayment
+from model.report import TextReport
+from model.repository import OrderRepository
+from view.console_view import ConsoleView
 
-    def calculate_total(self):
-        """Calcula el total del pedido aplicando descuento e impuesto."""
-        total = sum(self.items)
-
-        return total
-
-    def calculate_impuesto(self):
-        total = self.calculate_total()
-        total *= 1.19
-
-        return total
-
-    def calculate_descuento(self):
-        if self.customer_type == "regular":
-            total *= 0.9
-        elif self.customer_type == "vip":
-            total *= 0.8
-        elif self.customer_type == "employee":
-            total *= 0.5
-
-        return total
-
-    
-    def process_payment(self):
-        """Procesa el pago según el método seleccionado."""
-        if self.payment_method == "card":
-            print("Procesando pago con tarjeta")
-        elif self.payment_method == "cash":
-            print("Procesando pago en efectivo")
-        elif self.payment_method == "transfer":
-            print("Procesando transferencia bancaria")
-
-    def save_order(self, order_id):
-        """Guarda el pedido en una base de datos concreta."""
-        print(f"Guardando pedido {order_id} en MySQL...")
-
-    def generate_report(self, format_type):
-        """Genera un reporte del pedido en el formato solicitado."""
-        total = self.calculate_total()
-
-        if format_type == "text":
-            return f"Pedido con total {total}"
-        if format_type == "csv":
-            return f"total,{total}"
-        if format_type == "json":
-            return f'{{"total": {total}}}'
-
-        return "Formato no soportado"
+ITEMS = [10000, 25000, 5000]
 
 
-def main():
-    """Función principal de ejecución del sistema."""
-
-    # Datos de ejemplo
-    customer_type = "vip"
-    items = [10000, 25000, 5000]
-    payment_method = "card"
-    report_format = "text"
-    order_id = "ORD-001"
-
-    # Crear sistema
-    order_system = OrderSystem(customer_type, items, payment_method)
-
-    # Calcular total
-    total = order_system.calculate_descuento()
-    print(f"Total calculado: {total}")
-
-    # Procesar pago
-    order_system.process_payment()
-
-    # Guardar pedido
-    order_system.save_order(order_id)
-
-    # Generar reporte
-    report = order_system.generate_report(report_format)
-    print("Reporte:")
-    print(report)
+def main() -> None:
+    """Corre el flujo completo con un pedido de ejemplo."""
+    order = Order(ITEMS, VipDiscount())
+    view = ConsoleView()
+    controller = OrderController(view, CardPayment(), OrderRepository(), TextReport())
+    controller.run(order, "ORD-001")
 
 
 if __name__ == "__main__":
