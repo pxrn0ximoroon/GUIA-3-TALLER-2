@@ -11,6 +11,15 @@ class OrderSystem:
         """Calcula el total del pedido aplicando descuento e impuesto."""
         total = sum(self.items)
 
+        return total
+
+    def calculate_impuesto(self):
+        total = self.calculate_total()
+        total *= 1.19
+
+        return total
+
+    def calculate_descuento(self):
         if self.customer_type == "regular":
             total *= 0.9
         elif self.customer_type == "vip":
@@ -18,9 +27,9 @@ class OrderSystem:
         elif self.customer_type == "employee":
             total *= 0.5
 
-        total *= 1.19
         return total
 
+    
     def process_payment(self):
         """Procesa el pago según el método seleccionado."""
         if self.payment_method == "card":
@@ -62,7 +71,7 @@ def main():
     order_system = OrderSystem(customer_type, items, payment_method)
 
     # Calcular total
-    total = order_system.calculate_total()
+    total = order_system.calculate_descuento()
     print(f"Total calculado: {total}")
 
     # Procesar pago
