@@ -12,7 +12,7 @@ escribimos pruebas con pytest.
 
 ## De qué trata el proyecto
 
-Es un sistema de pedidos simple: recibís una lista de productos, dependiendo del
+Es un sistema de pedidos simple: recibes una lista de productos, dependiendo del
 tipo de cliente se aplica un descuento (regular, vip, empleado o estudiante),
 después se le suma el IVA del 19 % y listo. También puede procesar el pago,
 guardar el pedido y generar un reporte.
@@ -59,9 +59,9 @@ Para ejecutar el programa:
 python main.py
 ```
 
-## Comandos para chequear
+## Comandos para revisar
 
-Para ver que el código esté bien (style, imports, etc.):
+Para ver que el código esté bien (estilo, imports, etc.):
 
 ```bash
 ruff check .
@@ -76,7 +76,7 @@ pytest -v
 
 ## Cómo está organizado (MVC)
 
-Sepamos el proyecto en carpetas según la arquitectura Modelo-Vista-Controlador:
+Separamos el proyecto en carpetas según la arquitectura Modelo-Vista-Controlador:
 
 ```
 |-- main.py                  # El principal, arranca todo y conecta las partes
@@ -87,7 +87,7 @@ Sepamos el proyecto en carpetas según la arquitectura Modelo-Vista-Controlador:
 |   |-- repository.py        # El guardado del pedido (MySQL)
 |   `-- report.py            # Los formatos de reporte
 |-- view/
-|   `-- console_view.py      # Muestra la info en la consola (los prints)
+|   `-- console_view.py      # Muestra la info en la consola (las impresiones)
 |-- controller/
 |   `-- order_controller.py  # Coordina el modelo con la vista
 |-- tests/                   # Las pruebas con pytest
@@ -95,8 +95,8 @@ Sepamos el proyecto en carpetas según la arquitectura Modelo-Vista-Controlador:
 
 - **Model**: la lógica. Acá están el pedido, los descuentos, el pago, el
   guardado y los reportes.
-- **View**: solo muestra las cosas, o sea hace los prints. No calcula descuentos
-  ni nada de eso.
+- **View**: solo muestra las cosas, o sea hace las impresiones. No calcula
+  descuentos ni nada de eso.
 - **Controller**: el que organiza. Le pide al modelo los cálculos y le dice a la
   vista que muestre el resultado. No tiene toda la lógica del negocio.
 - **main.py**: el de arranque. Crea los objetos, los conecta y ejecuta.
@@ -109,7 +109,7 @@ La idea es que la vista no calcule y el modelo no imprima, cada uno en lo suyo.
   `OrderSystem` se encargaba de todo (pedido, descuento, impuesto, pago, guardar
   y reportar), ahora eso está separado en `Order`, `discount.py`, `payment.py`,
   `repository.py`, `report.py`, etc.
-- **OCP (Abierto/Cerrado)**: podés agregar descuentos nuevos, métodos de pago,
+- **OCP (Abierto/Cerrado)**: puedes agregar descuentos nuevos, métodos de pago,
   formatos de reporte o repositorios sin tocar el código que ya funciona. Por
   ejemplo metimos `StudentDiscount` sin tocar la clase `Order`.
 - **LSP (Sustitución de Liskov)**: todas las implementaciones (los descuentos,

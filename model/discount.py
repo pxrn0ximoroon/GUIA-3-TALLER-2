@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 
 class DiscountStrategy(ABC):
-    """Plantilla para los descuentos."""
+    """Modelo base para los descuentos."""
 
     @abstractmethod
     def apply(self, subtotal: float) -> float:

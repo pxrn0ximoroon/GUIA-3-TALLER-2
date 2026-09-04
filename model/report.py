@@ -6,7 +6,7 @@ from model.order import Order
 
 
 class ReportGenerator(ABC):
-    """Plantilla para generar reportes."""
+    """Modelo base para generar reportes."""
 
     @abstractmethod
     def generate(self, order: Order) -> str:

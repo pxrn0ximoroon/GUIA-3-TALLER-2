@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 
 class PaymentMethod(ABC):
-    """Plantilla para cualquier método de pago."""
+    """Modelo base para cualquier método de pago."""
 
     @abstractmethod
     def pay(self, amount: float) -> str:
