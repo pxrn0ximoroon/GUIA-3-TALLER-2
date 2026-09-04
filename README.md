@@ -8,7 +8,7 @@ escribimos pruebas con pytest.
 ## Integrantes
 
 - Andres Espinosa - 20242020114
-- [Nombre estudiante 2, si es en pareja]
+- David Alejandro Quiñones - 20251020120
 
 ## De qué trata el proyecto
 
